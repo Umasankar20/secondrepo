@@ -3,16 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personalized Greeting</title>
+    <title>Hello greeting message!</title>
 </head>
 <body>
-    <h1 id="greeting">Hello, Guest!</h1>
+    <h1 id="greeting"></h1>
     <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const name = urlParams.get('name');
-        if (name) {
-            document.getElementById('greeting').textContent = `Hello, ${name}!`;
-        }
+        // Functions to extract URL parameters
+        const getUrlParameter = (name) => {
+            name = name.replace(/\[/, '\\[').replace(/\]/, '\\]');
+            const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            const results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        };
+
+        // Get sender and recipient names from URL parameters
+        const senderName = getUrlParameter('from');
+        const recipientName = getUrlParameter('to');
+
+        // Update the greeting message
+        const greetingMessage = `Hello ${recipientName}! ❤️ From ${senderName}`;
+        const greetingElement = document.getElementById('greeting');
+        greetingElement.textContent = greetingMessage;
+
+        // Update the page title
+        document.title = `Hello ${recipientName}! ❤️`;    
     </script>
 </body>
 </html>

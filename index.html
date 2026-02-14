@@ -1,32 +1,141 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello greeting message!</title>
-</head>
-<body>
-    <h1 id="greeting"></h1>
-    <script>
-        // Functions to extract URL parameters
-        const getUrlParameter = (name) => {
-            name = name.replace(/\[/, '\\[').replace(/\]/, '\\]');
-            const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-            const results = regex.exec(location.search);
-            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-        };
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Be My Valentine? </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand:wght@500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Background Big Emojis -->
+    <div class="bg-element bg-1"></div>
+    <div class="bg-element bg-2"></div>
+    <div class="bg-element bg-3">✨</div>
 
-        // Get sender and recipient names from URL parameters
-        const senderName = getUrlParameter('from');
-        const recipientName = getUrlParameter('to');
+    <div class="card">
+      <!-- Cat Area -->
+      <div class="cat-container cat" id="cat">
+        <div class="heart-bubble"></div>
+        <div class="tear"></div>
+        <svg class="cat-svg" viewBox="0 0 200 180" xmlns="http://www.w3.org/2000/svg">
+          <!-- Body -->
+          <ellipse cx="100" cy="140" rx="60" ry="40" fill="#fff" stroke="#eee" stroke-width="2" />
+          <!-- Head -->
+          <circle cx="100" cy="90" r="50" fill="#fff" stroke="#eee" stroke-width="2" />
+          <!-- Ears -->
+          <path d="M65 60 L50 20 L90 50 Z" fill="#fff" stroke="#eee" stroke-width="2" />
+          <path d="M135 60 L150 20 L110 50 Z" fill="#fff" stroke="#eee" stroke-width="2" />
+          <path d="M70 58 L60 30 L85 52 Z" fill="#ffccd5" />
+          <path d="M130 58 L140 30 L115 52 Z" fill="#ffccd5" />
+          <!-- Cheeks -->
+          <circle class="feature cheeks" cx="75" cy="95" r="5" fill="#ffaec9" opacity="0.6" />
+          <circle class="feature cheeks" cx="125" cy="95" r="5" fill="#ffaec9" opacity="0.6" />
+          <!-- Face Features Groups -->
+          <g class="feature eye-normal">
+            <circle cx="85" cy="85" r="4" fill="#333" />
+            <circle cx="115" cy="85" r="4" fill="#333" />
+          </g>
+          <g class="feature eye-happy">
+            <path d="M78 85 Q85 80 92 85" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" />
+            <path d="M108 85 Q115 80 122 85" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" />
+          </g>
+          <g class="feature eye-wide">
+            <circle cx="85" cy="85" r="6" fill="#333" />
+            <circle cx="115" cy="85" r="6" fill="#333" />
+            <circle cx="87" cy="83" r="2" fill="white" />
+            <circle cx="117" cy="83" r="2" fill="white" />
+          </g>
+          <path class="feature mouth-normal" d="M95 100 Q100 105 105 100" stroke="#333" stroke-width="2" fill="none" stroke-linecap="round" />
+          <circle class="feature mouth-open" cx="100" cy="103" r="4" fill="#333" />
+          <!-- Paws holding edge -->
+          <circle cx="70" cy="140" r="15" fill="#fff" stroke="#eee" />
+          <circle cx="130" cy="140" r="15" fill="#fff" stroke="#eee" />
+        </svg>
+      </div>
 
-        // Update the greeting message
-        const greetingMessage = `Hello ${recipientName}! ❤️ From ${senderName}`;
-        const greetingElement = document.getElementById('greeting');
-        greetingElement.textContent = greetingMessage;
+      <!-- Step 1: Greeting -->
+      <div class="step active" id="step1">
+        <h1>Hello Beautiful! ❤️</h1>
+        <p>I hope your day is as beautiful as your smile...</p>
+        <div class="btn-group">
+          <button class="btn btn-primary" onclick="nextStep(2)">It is now! </button>
+        </div>
+      </div>
 
-        // Update the page title
-        document.title = `Hello ${recipientName}! ❤️`;    
-    </script>
-</body>
+      <!-- Step 2: Quote 1 -->
+      <div class="step" id="step2">
+        <h1>Just for you...</h1>
+        <p>"If I had a flower for every time I thought of you, I could walk through my garden forever."</p>
+        <div class="btn-group">
+          <button class="btn btn-primary" onclick="nextStep(3)">That's so sweet! </button>
+        </div>
+      </div>
+
+      <!-- Step 3: Happy Place -->
+      <div class="step" id="step3">
+        <h1>My Happy Place...</h1>
+        <p>They say home isn't a place, it's a feeling.<br />And honestly? <br />Home is wherever you are.</p>
+        <div class="btn-group">
+          <button class="btn btn-primary" onclick="nextStep(4)">Aw, stop! </button>
+        </div>
+      </div>
+
+      <!-- Step 4: World -->
+      <div class="step" id="step4">
+        <h1>You are my world...</h1>
+        <p>Everything is better when you're around.<br />You're the missing piece I didn't know I needed.</p>
+        <div class="btn-group">
+          <button class="btn btn-primary" onclick="nextStep(5)">Tell me more... </button>
+        </div>
+      </div>
+
+      <!-- Step 5: Little Things -->
+      <div class="step" id="step5">
+        <h1>The Little Things</h1>
+        <p>I love the way you laugh, the way you smile, and just... everything about you.<br />You are perfect to me.</p>
+        <div class="btn-group">
+          <button class="btn btn-primary" onclick="nextStep(6)">Start Question! </button>
+        </div>
+      </div>
+
+      <!-- Step 6: Promise -->
+      <div class="step" id="step6">
+        <h1>One Question...</h1>
+        <p>I have something very important to ask you...<br />Please answer from your heart? ❤️</p>
+        <div class="btn-group">
+          <button class="btn btn-primary" onclick="nextStep(7)">I Promise </button>
+        </div>
+      </div>
+
+      <!-- Step 7: Question -->
+      <div class="step" id="step7">
+        <h1>Be My Valentine?</h1>
+        <p>Will you do me the honor? </p>
+        <div class="btn-group">
+          <button class="btn btn-primary" id="yesBtn" onclick="acceptLove()">YES! </button>
+          <button class="btn btn-secondary" id="noBtn">No...</button>
+        </div>
+      </div>
+
+      <!-- Step 8: Success -->
+      <div class="step" id="step8">
+        <h1 style="font-size: 3.5rem">YAYY!! </h1>
+    
+        <p>You have no idea how happy this makes me! <br />I Love You <span>❤️</span>
+          
+           </p>
+        <div class="btn-group">
+          <button class="btn btn-primary" onclick="location.reload()">Replay </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="ss.js"></script>
+  </body>
 </html>
+<html>
+
+    
